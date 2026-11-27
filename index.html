@@ -107,6 +107,7 @@
   .photo.empty img,.photo.empty video{display:none}
   .photo video{width:100%;height:100%;object-fit:cover;display:block}
   .photo.video{grid-column:1/-1;aspect-ratio:16/9}
+  .photo.wide{grid-column:1/-1;aspect-ratio:16/10}
   .photo.video::before{
     content:"▶"; position:absolute; z-index:1; left:50%; top:50%; translate:-50% -50%;
     width:60px; height:60px; border-radius:50%; background:rgba(255,255,255,.9); color:var(--pink);
@@ -201,9 +202,12 @@
 <script>
   /* ===== AYARLAR — buradan düzenle ===== */
   const PHOTOS = [
-    "foto1.jpg","foto2.jpg","foto3.jpg","foto4.jpg","foto5.jpg",
-    "foto6.jpg","foto7.jpg","foto8.jpg","foto9.jpg","foto10.jpg",
-    "video1.mp4"   // video istemezsen bu satırı sil (üstteki virgülü de)
+    "Foto-1.jpeg", "Foto-2.jpeg", "Foto-3.jpeg", "Foto-4.jpeg",
+    "Foto-5.jpeg", "Foto-6.jpeg", "Foto-7.jpeg", "Foto-8.jpeg",
+    "Foto-9.jpeg", "Foto-10.jpeg", "Foto-11.jpeg", "Foto-12.jpeg",
+    "Foto-13.jpeg", "Foto-14.jpeg", "Foto-15.jpeg", "Foto-16.jpeg",
+    "Foto-17.jpeg", "Foto-18.jpeg", "Foto-19.jpeg",
+    "video-1.mp4"   // video istemezsen bu satırı sil (üstteki virgülü de)
   ];
   const MOVE_AFTER = 8500;   // çiçek açtıktan sonra sola kayma zamanı (ms)
   const SHOW_AFTER = 1500;   // kaymadan sonra fotoğrafların gelme zamanı (ms)
@@ -267,6 +271,9 @@
     f.onclick = ()=>{ if(!f.classList.contains("empty")) openLb(i); };
     grid.appendChild(f);
   });
+
+  const singles = [...grid.querySelectorAll(".photo:not(.video)")];
+  if(singles.length % 2) singles[singles.length-1].classList.add("wide");
 
   // Çiçek kayar → fotoğraflar gelir
   let started = false;
